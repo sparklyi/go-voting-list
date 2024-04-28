@@ -28,5 +28,5 @@ func (user UserController) GetInfo(c *gin.Context) {
 }
 
 func (user UserController) GetList(c *gin.Context) {
-	Failed(c, http.StatusBadRequest, "no info")
+	//logger.Info(logrus.Fields{"test": 1}, "test")
 }
