@@ -4,7 +4,6 @@ import (
 	"gin_Ranking/controller"
 	"gin_Ranking/pkg/logger"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func Router() *gin.Engine {
@@ -27,25 +26,11 @@ func Router() *gin.Engine {
 	{
 		order.GET("/list", controller.OrderController{}.GetList)
 	}
-	g := r.Group("/index")
+
+	//活动请求组
+	activity := r.Group("/activity")
 	{
-		g.GET("/", func(c *gin.Context) {
-			c.String(http.StatusOK, "get")
-		})
-
-		g.POST("/", func(c *gin.Context) {
-			c.JSON(http.StatusOK, "post request")
-		})
-
-		g.PUT("/", func(c *gin.Context) {
-			c.JSON(http.StatusOK, "put request")
-
-		})
-
-		g.DELETE("/", func(c *gin.Context) {
-			c.JSON(http.StatusOK, "delete request")
-		})
-
+		activity.POST("/createAct", controller.ActController{}.CreateActivity)
 	}
 	return r
 }
