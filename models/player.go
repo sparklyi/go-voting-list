@@ -3,9 +3,19 @@ package models
 import (
 	"gin_Ranking/dao"
 	"gin_Ranking/pkg/logger"
+	"time"
 )
 
 type Player struct {
+	ID          int       `gorm:"column:id" json:"id"`
+	ActID       int       `gorm:"column:act_id" json:"actID"`
+	Serial      string    `gorm:"column:serial;type:varchar(255)" json:"serial"`
+	Nickname    string    `gorm:"column:nickname;type:varchar(255)" json:"nickname"`
+	Declaration string    `gorm:"column:declaration;type:varchar(255)" json:"declaration"`
+	Avatar      string    `gorm:"column:avatar;type:varchar(255)" json:"avatar"`
+	Poll        int       `gorm:"column:poll" json:"poll"`
+	CreateTime  time.Time `gorm:"column:create_time" json:"createTime"`
+	UpdateTime  time.Time `gorm:"column:update_time" json:"updateTime"`
 }
 
 func (Player) TableName() string {

@@ -24,7 +24,7 @@ func (user UserController) GetInfo(c *gin.Context) {
 	//通过postform获得
 	//acc.Name = c.PostForm("name")
 	//acc.Msg = c.PostForm("msg")
-	err = models.CreateUserInfo(acc.Name)
+	err = models.CreateUserInfo(acc.Name, "1223")
 
 	if err != nil {
 		logger.Error(map[string]interface{}{"error": "create field failed"}, err.Error())

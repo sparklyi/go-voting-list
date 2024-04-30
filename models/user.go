@@ -3,12 +3,15 @@ package models
 import (
 	"gin_Ranking/dao"
 	"gin_Ranking/pkg/logger"
-	"gorm.io/gorm"
+	"time"
 )
 
 type User struct {
-	gorm.Model
-	Username string `gorm:"username"`
+	ID         int       `gorm:"column:id" json:"id"`
+	Username   string    `gorm:"column:username" json:"username"`
+	Password   string    `gorm:"column:password" json:"password"`
+	CreateTime time.Time `gorm:"column:creat_time" json:"createTime"`
+	UpdateTime time.Time `gorm:"column:update_time" json:"updateTime"`
 }
 
 // TableName 实现gorm中接口方法，数据库中为user表
@@ -33,9 +36,9 @@ func GetUserInfo(username string) (User, error) {
 	return recode, err
 }
 
-func CreateUserInfo(name string) error {
+func CreateUserInfo(name, password string) error {
 	//创建记录结构体
-	record := &User{Model: gorm.Model{}, Username: name}
+	record := &User{Username: name, Password: password}
 	//插入记录
 	err := dao.DB.Create(&record).Error
 	return err
