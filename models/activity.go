@@ -7,11 +7,11 @@ import (
 )
 
 type Activity struct {
-	ID        int       `gorm:"column:id" json:"id"`
-	Name      string    `gorm:"column:name;type:varchar(255)" json:"name"`
-	Details   string    `gorm:"column:details;type:varchar(255)" json:"details"`
-	StartTime time.Time `gorm:"column:start_time" json:"startTime"`
-	StopTime  time.Time `gorm:"column:stop_time" json:"stopTime"`
+	ID        int    `gorm:"column:id" json:"id"`
+	Name      string `gorm:"column:name;type:varchar(255)" json:"name"`
+	Details   string `gorm:"column:details;type:varchar(255)" json:"details"`
+	StartTime int64  `gorm:"column:start_time" json:"startTime"`
+	StopTime  int64  `gorm:"column:stop_time" json:"stopTime"`
 }
 
 func (Activity) TableName() string {
@@ -33,17 +33,17 @@ func init() {
 // CreateAct 创建活动
 func CreateAct(name string, details string) error {
 	//创建记录对象
-	record := &Activity{Name: name, Details: details, StartTime: time.Now().Local(), StopTime: time.Now().Local().Add(30)}
+	record := &Activity{Name: name, Details: details, StartTime: time.Now().Unix()}
 	err := dao.DB.Create(&record).Error
 	return err
 }
 
 // ReadActToName 通过活动名读取活动信息
-func ReadActToName(name string) (*[]Activity, error) {
+func ReadActToName(name string) ([]Activity, error) {
 
 	var records []Activity
 	err := dao.DB.Model(&Activity{}).Where("name = ?", name).Find(&records).Error
-	return &records, err
+	return records, err
 }
 
 // ReadActToID 通过ID读取活动信息

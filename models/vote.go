@@ -7,10 +7,10 @@ import (
 )
 
 type Vote struct {
-	ID       int       `gorm:"column:id" json:"id"`
-	UserID   int       `gorm:"column:user_id;"`
-	PlayerID int       `gorm:"column:player_id"`
-	VoteTime time.Time `gorm:"vote_time" json:"voteTime"`
+	ID       int   `gorm:"column:id" json:"id"`
+	UserID   int   `gorm:"column:user_id;"`
+	PlayerID int   `gorm:"column:player_id"`
+	VoteTime int64 `gorm:"vote_time" json:"voteTime"`
 }
 
 func (Vote) TableName() string {
@@ -29,7 +29,7 @@ func init() {
 
 func AddVote(userID, playerID int) (*Vote, error) {
 
-	record := &Vote{UserID: userID, PlayerID: playerID}
+	record := &Vote{UserID: userID, PlayerID: playerID, VoteTime: time.Now().Unix()}
 	err := dao.DB.Create(&record).Error
 	return record, err
 }

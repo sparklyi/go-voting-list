@@ -15,12 +15,12 @@ func Router() *gin.Engine {
 
 	//todo panic信息记录
 	r.Use(logger.Recover)
+
 	//用户请求组
 	user := r.Group("/user")
 	{
-		user.POST("/info", controller.UserController{}.GetInfo)
+		user.POST("/register", controller.UserController{}.Register)
 
-		user.GET("/list", controller.UserController{}.GetList)
 	}
 	order := r.Group("order")
 	{

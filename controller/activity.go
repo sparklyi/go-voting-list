@@ -30,7 +30,7 @@ func (act ActController) CreateActivity(c *gin.Context) {
 		Failed(c, http.StatusInternalServerError, "读取失败")
 		return
 	}
-	for _, v := range *acts {
+	for _, v := range acts {
 		fmt.Println(v)
 	}
 	Success(c, http.StatusOK, "read", "OK", 1)

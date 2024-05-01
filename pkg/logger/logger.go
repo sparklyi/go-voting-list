@@ -77,7 +77,9 @@ func ToFile() gin.LoggerConfig {
 			return fmt.Sprintln(
 				params.TimeStamp.Format("2006-01-02 15:04:05"),
 				params.ClientIP,
+				params.Request.Proto,
 				params.Request.UserAgent(),
+				params.Request.Header,
 				params.ErrorMessage,
 				params.Method,
 				params.StatusCode,
@@ -110,6 +112,7 @@ func Recover(c *gin.Context) {
 			//写入数据
 			//todo 记录panic时间
 			file.WriteString("panic error time:" + time.Now().Format("2006-01-02 15:04:05") + "=================\n")
+
 			//todo 记录错误信息panic_eer
 			file.WriteString(fmt.Sprintln(panic_err))
 			file.WriteString("stacktrace from panic:" + string(debug.Stack()) + "\n")

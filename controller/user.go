@@ -14,29 +14,59 @@ type Account struct {
 type UserController struct {
 }
 
-func (user UserController) GetInfo(c *gin.Context) {
-	//通过shouldBind绑定字段,此时设置了json 发送时只能解析json格式
-	acc := Account{}
-	err := c.ShouldBind(&acc)
-	if err != nil {
-		Failed(c, http.StatusNotFound, "no info")
-	}
-	//通过postform获得
-	//acc.Name = c.PostForm("name")
-	//acc.Msg = c.PostForm("msg")
-	err = models.CreateUserInfo(acc.Name, "1223")
+// Register 用户注册
+func (u UserController) Register(c *gin.Context) {
+	username := c.DefaultPostForm("username", "")
+	password := c.DefaultPostForm("password", "")
+	confirmPassword := c.DefaultPostForm("confirmPassword", "")
 
-	if err != nil {
-		logger.Error(map[string]interface{}{"error": "create field failed"}, err.Error())
+	//todo 不能为空
+	if username == "" || password == "" || confirmPassword == "" {
+		Failed(c, http.StatusBadRequest, "null data present")
+		return
 	}
-	record, err := models.GetUserInfo(acc.Name)
-	if err != nil {
-		logger.Error(map[string]interface{}{"getUserTest failed": err.Error()})
+	//todo 密码不一致
+	if password != confirmPassword {
+		Failed(c, http.StatusBadRequest, "twice password differ")
+		return
 	}
-	Success(c, http.StatusOK, acc.Name, record, 1)
-
+	//todo username存在
+	record, _ := models.GetUserInfoByName(username)
+	if record.ID != 0 {
+		Failed(c, http.StatusBadRequest, "username is existed")
+		return
+	}
+	err := models.CreateUserInfo(username, EncryptMD5(password))
+	if err != nil {
+		logger.Error(map[string]interface{}{"error": username + " register failed"}, err.Error())
+		Failed(c, http.StatusInternalServerError, "fail to register")
+		return
+	}
+	Success(c, http.StatusOK, "registered successfully", username, 1)
 }
 
-func (user UserController) GetList(c *gin.Context) {
-	//logger.Info(logrus.Fields{"test": 1}, "test")
+// Login 用户登录
+func (u UserController) Login(c *gin.Context) {
+
+	username := c.DefaultPostForm("username", "")
+	password := c.DefaultPostForm("password", "")
+	//todo 不为空
+	if username == "" || password == "" {
+		Failed(c, http.StatusBadRequest, "null data present")
+		return
+	}
+	//todo 用户是否存在,存在时密码是否正确
+	record, _ := models.GetUserInfoByName(username)
+	if record.ID == 0 {
+		Failed(c, http.StatusNotFound, "the user does not exist")
+		return
+	}
+	//md5只能生成哈希字符串，所以利用当前输入密码加密后匹配record
+	if record.Password != EncryptMD5(password) {
+		Failed(c, http.StatusUnauthorized, "wrong password")
+		return
+	}
+	//todo 保存session
+	data := models.UserAPI{ID: record.ID, Username: username}
+	Success(c, http.StatusOK, "login successfully", data, 1)
 }

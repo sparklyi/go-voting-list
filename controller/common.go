@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -20,4 +22,12 @@ func Success(c *gin.Context, code int, msg, data any, count int) {
 func Failed(c *gin.Context, code int, msg any) {
 	json := &JsonStruct{Code: code, Msg: msg}
 	c.JSON(http.StatusOK, json)
+}
+
+// EncryptMD5 返回字符串的MD5哈希值
+func EncryptMD5(s string) string {
+
+	m := md5.New()
+	m.Write([]byte(s))
+	return hex.EncodeToString(m.Sum(nil))
 }
