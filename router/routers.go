@@ -22,11 +22,17 @@ func Router() *gin.Engine {
 		user.POST("/register", controller.UserController{}.Register)
 
 	}
-	order := r.Group("order")
+	//参赛人员请求组
+	player := r.Group("/player")
 	{
-		order.GET("/list", controller.OrderController{}.GetList)
+		player.POST("/list", controller.PlayerController{}.GetPlayerInfo)
 	}
+	//投票请求组
+	vote := r.Group("/vote")
+	{
+		vote.POST("/add", controller.VoteController{}.AddVote)
 
+	}
 	//活动请求组
 	activity := r.Group("/activity")
 	{

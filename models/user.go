@@ -38,7 +38,17 @@ func init() {
 // GetUserInfoByName 获取指定名字的用户信息
 func GetUserInfoByName(username string) (User, error) {
 	var record User
+	//find查找 若没有数据没有警告
 	err := dao.DB.Model(&User{}).Where("username = ?", username).Find(&record).Error
+	//fmt.Println(record)
+	return record, err
+}
+
+// GetUserInfoByID 获取指定id的用户信息
+func GetUserInfoByID(id int) (User, error) {
+	var record User
+	// first因为sql语句加上 limit 1 所以没有数据会警告
+	err := dao.DB.Model(&User{}).Where("id = ?", id).First(&record).Error
 	//fmt.Println(record)
 	return record, err
 }

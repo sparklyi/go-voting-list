@@ -27,9 +27,16 @@ func init() {
 
 }
 
-func AddVote(userID, playerID int) (*Vote, error) {
-
-	record := &Vote{UserID: userID, PlayerID: playerID, VoteTime: time.Now().Unix()}
-	err := dao.DB.Create(&record).Error
+// GetVoteInfo 通过userID和playerID获得唯一的投票
+func GetVoteInfo(userID, playerID int) (Vote, error) {
+	var record Vote
+	err := dao.DB.Model(&Vote{}).Where("user_id = ? and player_id = ?", userID, playerID).First(&record).Error
 	return record, err
+}
+
+// AddVote 添加投票
+func AddVote(useID, playerID int) (Vote, error) {
+	record := &Vote{UserID: useID, PlayerID: playerID, VoteTime: time.Now().Unix()}
+	err := dao.DB.Create(&record).Error
+	return *record, err
 }
