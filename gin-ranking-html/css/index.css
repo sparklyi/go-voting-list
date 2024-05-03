@@ -1,0 +1,298 @@
+.logo{
+    width: 90%;
+    margin:1rem auto;
+    display: flex;
+    justify-content: space-between;
+}
+.logo_but{
+    width:35%;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    font-size:0.6rem;
+    border-radius: 3px;
+    background:-webkit-linear-gradient(left,orangered,orange);
+    background:-o-linear-gradient(right,orangered,orange);
+    background:-moz-linear-gradient(right,orangered,orange);
+    background:linear-gradient(to right,orangered,orange);
+    color: #fffeff;
+    text-align: center;
+}
+
+#main{
+    width: 100%;
+    height: 90vh;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.Exhibition{
+
+}
+.Exhibition_block{
+	width: 44%;
+    height: 10rem;
+    float: left;
+	background: #fff;
+    border:1px solid #ebebeb;
+   	margin: 4% 2% 0% 3%;
+}
+
+.E_center{
+	width: 90%;
+    height: 100%;
+    margin: 0 auto;
+}
+// .Exhibition li:last-child{
+// 	margin-bottom:2.5rem;
+// }
+.E_top{
+	width: 100%;
+    height: 45%;
+    margin: 0.5rem 0;
+}
+.E_top img{
+	width:100%;
+	height:100%;
+}
+.E_bot p{
+    height: 1rem;
+	text-align: center;
+    font-size: 0.7rem;
+    line-height: 1rem;
+    font-weight: 600;
+    overflow: hidden;
+}
+.E_bot .sub{
+	width: 100%;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    font-size:0.6rem;
+    margin: 0.5rem auto;
+    border-radius: 3px;
+    background:-webkit-linear-gradient(left,orangered,orange);
+    background:-o-linear-gradient(right,orangered,orange);
+    background:-moz-linear-gradient(right,orangered,orange);
+    background:linear-gradient(to right,orangered,orange);
+    color: #fffeff;
+}
+
+.xiangqing{
+    position: fixed;
+    z-index:15;
+}
+.xiangqing .table {
+    width: 85%;
+    margin: 0 auto;
+    /*height: 19rem;*/
+    color: #555;
+    background-size: contain;
+    padding: 0.5rem 0;
+    line-height: 1.7rem;
+    color: #da2423;
+    font-weight: both;
+    margin-top: 1rem;
+    background: #fff;
+    position: relative;
+    border-radius: 3px;
+}
+.xiangqing .table_scroll{
+    width:100%;
+    /*height:16rem;*/
+}
+.xiangqing .zuopin_title{
+    width: 60%;
+    height: 1rem;
+    line-height: 1rem;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1rem;
+    color: #222;
+    overflow:hidden;
+}
+.xiangqing .zuopin_title img{
+    width:100%;
+}
+.xiangqing .wrap_head{
+    width:85%;
+    min-height:3rem;
+    display: flex;
+    margin: 1rem auto;
+}
+.xiangqing .wrap_pic{
+    width: 3.5rem;
+    height: 3.5rem;
+}
+.xiangqing .wrap_pic img{
+    width:100%;
+    border-radius: 8px;
+}
+.xiangqing .wrap_right{
+    width:70%;
+    height:auto;
+}
+.xiangqing .wrap_name{
+    height:auto;
+    line-height:1rem;
+    display:block;
+    font-size:0.6rem;
+    padding-left:5%;
+    color:#222;
+}
+.xiangqing .wrap_name1{
+    height: 3rem;
+    overflow: scroll;
+}
+.xiangqing .wrap_name label{
+     color:#c10c12;
+ }
+
+.xiangqing .wrap_main{
+    width:90%;
+    margin:0 auto;
+    text-align:center;
+    max-height: 8.5rem;
+    overflow: hidden;
+}
+.xiangqing .wrap_main img{
+    width:100%;
+}
+
+.xiangqing .wrap_toupiao{
+    width: 90%;
+    margin: 0.6rem auto;
+    overflow: hidden;
+    text-align: center;
+}
+.xiangqing #sub{
+    width: 100%;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    font-size:0.6rem;
+    margin: 0 auto;
+    border-radius: 3px;
+    background:-webkit-linear-gradient(left,orangered,orange);
+    background:-o-linear-gradient(right,orangered,orange);
+    background:-moz-linear-gradient(right,orangered,orange);
+    background:linear-gradient(to right,orangered,orange);
+    color: #fffeff;
+}
+
+.paihang{
+    width: 100%;
+    position: fixed;
+    z-index:15;
+    left: 50%;
+    top: 50%;
+    margin-left: -50%;
+    margin-top: -8.5rem;
+}
+.paihang .table {
+    width: 75%;
+    margin: 0 auto;
+    height: 17rem;
+    background-size: contain;
+    padding: 0.5rem 0;
+    line-height: 1.7rem;
+    color: #da2423;
+    margin-top: 0.2rem;
+    background: #fff;
+    border-radius: 3px;
+}
+.paihang .wrap_paiming{
+    width: 30%;
+    margin: 0.6rem auto 0.4rem;
+    text-align:center;
+}
+.paihang .wrap_paiming img{
+    width:100%;
+}
+.table-tab{
+    overflow-y:auto;
+    height:13.5rem;
+    color:#555;
+}
+.paihang .table .table-wrap{
+    width: 100%;
+    clear:both;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.paihang .table .table-wrap div{
+    width:33%;
+    float:left;
+    text-align:center;
+    font-size:0.6rem;
+}
+.wrap_toupiao{
+    width: 90%;
+    margin: 0.2rem auto;
+    overflow: hidden;
+    text-align: center;
+}
+.sub_one{
+    width: 100%;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    font-size:0.6rem;
+    margin: 0 auto;
+    border-radius: 3px;
+    background:-webkit-linear-gradient(left,orangered,orange);
+    background:-o-linear-gradient(right,orangered,orange);
+    background:-moz-linear-gradient(right,orangered,orange);
+    background:linear-gradient(to right,orangered,orange);
+    color: #fffeff;
+}
+
+.actives{
+    width: 100%;
+    position: fixed;
+    z-index:15;
+    left: 50%;
+    top: 50%;
+    margin-left: -50%;
+    margin-top: -8.25rem;
+}
+.actives .center{
+    width: 75%;
+    height: 16.5rem;
+    margin:1rem auto;
+    background-color: #fff;
+    border-radius:5px;
+    overflow: hidden;
+    overflow: scroll;
+    padding: 0.2rem 0;
+}
+.actives .Title{
+    padding-top:0.3rem;
+    font-weight: bold;
+}
+.actives .Title p{
+    text-align:center;
+    color: #ff0000;
+    font-size: 0.6rem;
+
+}
+.actives .text{
+    width:90%;
+    margin: 0.5rem auto;
+    font-size: 0.55rem;
+    color:#000;
+}
+.actives .active{
+    width:90%;
+    margin: 0 auto;
+    color: #ff0000;
+    font-size: 0.55rem;
+    padding-top:0.4rem;
+}
+.actives .text-active{
+    width:90%;
+    margin: 0.3rem auto;
+    font-size: 0.55rem;
+    color:#000;
+    text-indent: 0.7rem;
+    line-height: 1rem;
+}

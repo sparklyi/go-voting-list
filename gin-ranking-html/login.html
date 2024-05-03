@@ -1,0 +1,71 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>登陆-投票系统</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="stylesheet" type="text/css" href="css/user.css"/>
+    <script src="js/vue.global.js"></script>
+    <script src="js/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="login-logo circle text-center">欢迎</div>
+        <form name="forms" class="login-cont">
+            <ul>
+                <li><input type="text" placeholder="请输入您的用户名" v-model="username"></li>
+                <li>
+                    <span id="box"><input type="password" placeholder="请输入您的密码" name="password" v-model="password"></span>
+                </li>
+            </ul>
+            <a href="javascript:;" class="button text-center block" v-on:click="login()">登 录</a>
+            <a href="javascript:;" class="text-center block font-color">忘记密码？</a>
+            <p class="text-center">没有账号？ <a href="register.html" class="font-color" >立即注册</a></p>
+        </form>
+    </div>  
+</body>
+<script>
+    const { createApp } = Vue
+  
+    createApp({
+        data() {
+            return {
+                username: "",   //用户名
+                password: "",   //密码
+            }
+        },
+        methods: {
+            login() {
+                //登录
+                if(this.username == "" || this.password == "") {
+                    alert("请填写用户名和密码")
+                    return false;
+                }
+                axios({
+                    method: 'post',
+                    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                    url: '/api/user/login',
+                    data: {
+                        username: this.username,
+                        password: this.password,
+                    }
+                }).then((res) => {
+                    if(res.data.code == 0){
+                        //保存登录状态
+                        localStorage.setItem("uid", res.data.data.id);
+                        location.href = "index.html"
+                    } else {
+                        alert("登录失败，请稍后重试")
+                        return false;
+                    }
+                })
+            },
+        }
+  }).mount('#app')
+</script>
+</html>

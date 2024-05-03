@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>注册-投票系统</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="stylesheet" type="text/css" href="css/user.css"/>
+    <script src="js/vue.global.js"></script>
+    <script src="js/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="login-logo circle text-center">欢迎</div>
+        <form class="login-cont">
+            <ul>
+                <li><input type="text" placeholder="请输入您的用户名" v-model="username"></li>
+                <li>
+                    <span id="box"><input type="password" placeholder="请输入密码" v-model="password"></span>
+                </li>
+                <li>
+                    <span id="box"><input type="password" placeholder="确认密码" v-model="confirmPassword"></span>
+                </li>
+            </ul>
+            <a href="javascript:;" class="button text-center block" v-on:click="register()">注 册</a>
+            <p class="text-center">已有账号？ <a href="login.html" class="font-color" >立即登录</a></p>
+        </form>
+    </div>    
+</body>
+<script>
+    const { createApp } = Vue
+  
+    createApp({
+        data() {
+            return {
+                username: "",           //用户名
+                password: "",           //密码
+                confirmPassword: ""     //确认密码
+            }
+        },
+        methods: {
+            register() {
+                //注册
+                if(this.username == "" || this.password == "" || this.confirmPassword == "") {
+                    alert("请填写用户名密码和确认密码")
+                    return false;
+                }
+                axios({
+                    method: 'post',
+                    headers: { 'content-type': 'application/x-www-form-urlencoded' },
+                    url: '/api/user/register',
+                    data: {
+                        username: this.username,
+                        password: this.password,
+                        confirmPassword: this.confirmPassword,
+                    }
+                }).then((res) => {
+                    if(res.data.code == 0){
+                        alert("注册成功，请登录")
+                        location.href = "login.html"
+                    } else {
+                        alert("注册失败，" + res.data.msg)
+                        return false;
+                    }
+                })
+            },
+        }
+  }).mount('#app')
+</script>
+</html>
+
