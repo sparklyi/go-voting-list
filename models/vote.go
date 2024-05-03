@@ -8,8 +8,9 @@ import (
 
 type Vote struct {
 	ID       int   `gorm:"column:id" json:"id"`
-	UserID   int   `gorm:"column:user_id;"`
-	PlayerID int   `gorm:"column:player_id"`
+	ActID    int   `gorm:"column:act_id" json:"actId"`
+	UserID   int   `gorm:"column:user_id;" json:"userId"`
+	PlayerID int   `gorm:"column:player_id" json:"playerId"`
 	VoteTime int64 `gorm:"vote_time" json:"voteTime"`
 }
 
@@ -28,15 +29,15 @@ func init() {
 }
 
 // GetVoteInfo 通过userID和playerID获得唯一的投票
-func GetVoteInfo(userID, playerID int) (Vote, error) {
+func GetVoteInfo(actID, userID, playerID int) (Vote, error) {
 	var record Vote
-	err := dao.DB.Model(&Vote{}).Where("user_id = ? and player_id = ?", userID, playerID).First(&record).Error
+	err := dao.DB.Model(&Vote{}).Where("act_id = ? and user_id = ? and player_id = ?", actID, userID, playerID).First(&record).Error
 	return record, err
 }
 
 // AddVote 添加投票
-func AddVote(useID, playerID int) (Vote, error) {
-	record := &Vote{UserID: useID, PlayerID: playerID, VoteTime: time.Now().Unix()}
+func AddVote(actID, userID, playerID int) (Vote, error) {
+	record := &Vote{ActID: actID, UserID: userID, PlayerID: playerID, VoteTime: time.Now().Unix()}
 	err := dao.DB.Create(&record).Error
 	return *record, err
 }

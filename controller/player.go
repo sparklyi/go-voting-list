@@ -14,7 +14,7 @@ func (PlayerController) GetPlayerInfo(c *gin.Context) {
 	//获取当前活动的id
 	actID, _ := strconv.Atoi(c.DefaultPostForm("actId", "0"))
 	//查询此活动的参赛人员
-	players, err := models.GetPlayerInfoByActID(actID)
+	players, err := models.GetPlayerInfoByActID(actID, "id asc")
 	if err != nil {
 		Failed(c, http.StatusNotFound, "not found player of the activity")
 		return

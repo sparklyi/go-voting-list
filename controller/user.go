@@ -3,8 +3,10 @@ package controller
 import (
 	"gin_Ranking/models"
 	"gin_Ranking/pkg/logger"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 type Account struct {
@@ -67,6 +69,14 @@ func (u UserController) Login(c *gin.Context) {
 		return
 	}
 	//todo 保存session
+	session := sessions.Default(c)
+	session.Set("loginID:"+strconv.Itoa(record.ID), record.ID)
+	err := session.Save()
+	if err != nil {
+		logger.Error(map[string]interface{}{"error": "session save failed"}, err.Error())
+		return
+	}
+
 	data := models.UserAPI{ID: record.ID, Username: username}
 	Success(c, http.StatusOK, "login successfully", data, 1)
 }

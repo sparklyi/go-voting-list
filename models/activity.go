@@ -46,8 +46,8 @@ func ReadActToName(name string) ([]Activity, error) {
 	return records, err
 }
 
-// ReadActToID 通过ID读取活动信息
-func ReadActToID(id int) (*Activity, error) {
+// GetActToID 通过ID读取活动信息
+func GetActToID(id int) (*Activity, error) {
 
 	var record Activity
 	err := dao.DB.Model(&Activity{}).Where("id = ?", id).First(&record).Error

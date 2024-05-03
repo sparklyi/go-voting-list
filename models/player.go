@@ -31,10 +31,10 @@ func init() {
 	}
 }
 
-// GetPlayerInfoByActID 通过活动id查询选手
-func GetPlayerInfoByActID(actID int) ([]Player, error) {
+// GetPlayerInfoByActID 通过活动id查询选手并根据排序参数排序
+func GetPlayerInfoByActID(actID int, sortArg string) ([]Player, error) {
 	var records []Player
-	err := dao.DB.Model(&Player{}).Where("act_id = ?", actID).Find(&records).Error
+	err := dao.DB.Model(&Player{}).Where("act_id = ?", actID).Order(sortArg).Find(&records).Error
 
 	return records, err
 }
@@ -52,6 +52,7 @@ func GetPlayerInfoByID(id int) (Player, error) {
 func UpdatePlayerPoll(id int) error {
 	//gorm.Expr 将表达式和参数拼接成子串返回
 	//UPDATE `player` SET `poll`=poll + 1 WHERE id = 1
-	err := dao.DB.Debug().Model(&Player{}).Where("id = ?", id).Update("poll", gorm.Expr("poll + ?", 1)).Error
+	err := dao.DB.Model(&Player{}).Where("id = ?", id).Update("poll", gorm.Expr("poll + ?", 1)).Error
+
 	return err
 }
