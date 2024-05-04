@@ -6,4 +6,4 @@
 利用redis优化排行榜响应速度
 
 
-参考视频：[下雨le](https://www.imooc.com/learn/1393)
+参考视频：[下雨le](https://www.imooc.com/learn/133)
